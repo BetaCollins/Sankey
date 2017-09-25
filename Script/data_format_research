@@ -1,0 +1,150 @@
+all of these notes are made in reference to Figure 2 of paper "Bacterial flora-typing with targeted, chip-based Pyrosequencing" located here:  http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2244631/#B16
+
+file format - binary dump of the below structure
+
+DGNODE format -> [label,count,parent,first_child,num_children]
+label : this is the label of the node displayed in the graph.  i.e. Archea, Bacteria, Actinobacteria, etc.  It can also be blank
+count : this is the percentage displayed with the label in the graph.  Archea 0.35%, Bacteria 92.57%
+parent: this is the index of the node in the list of nodes for one level up in the phylogeny
+first_child: this is the index of the node in the list of nodes one level down which represents the first child of this node.
+num_children: number of children this node has.  can use "num_children" with "first_child" to iterate through children on next level down in classification.
+
+
+example classification structure based on Figure 2 (the first blank level just serves as the root of the tree, one level up from Domain [#blank label, 100%, no parent, first child is first element in next level of hierarchy, 3 children])
+"" (count=1) - DGNODE("", 100.00, -1, 0, 3)
+"domain" (count=3)
+	DGNODE[0]("Archaea", 0.35, 0, 0, 1), 
+	DGNODE[1]("Bacteria", 92.57, 0, 1, 8), 
+	DGNODE[2]("", 7.05%, 1, -1, 0)
+"phylum" (count=10)
+	DGNODE[0]("", 0.34, 0, 0, 1), 
+	DGNODE[1]("Actinobacteria", 4.70, 1, 1, 1), 
+	DGNODE[2]("Bacteroidetes", 1.32, 1, 2, 1), 
+	DGNODE[3]("Firmicutes", 37.04, 1, 3, 4), 
+	DGNODE[4]("Fusobacteria", 0.80, 1, 7, 1), 
+	DGNODE[5]("Nitrospira", 1.26, 1, 8, 1), 
+	DGNODE[6]("Proteobacteria", 10.28, 1, 9, 6), 
+	DGNODE[7]("", 0.49, 1, 15, 1), 
+	DGNODE[8]("", 20.78, 1, -1, 0), 
+	DGNODE[9]("", 15.52, 1, -1 0)
+"class" (count=15)
+	DGNODE[0]("", 0.34, 0, 0, 1), 
+	DGNODE[1]("Actinobacteria", 4.70, 1, 1, 3), 
+	DGNODE[2]("Bacteriodales", 1.18, 2, 4, 1), 
+	DGNODE[3]("Bacilli", 26.27, 3, 5, 4), 
+	DGNODE[4]("Cloistridia", 5.04, 3, 8, 1), 
+	DGNODE[5]("", 2.22, 3, -1, 0), 
+	DGNODE[6]("", 3.23, 3, -1, 0), 
+	DGNODE[7]("Fusobacteriales", 0.8, 4, 10, 1), 
+	DGNODE[8]("Nitrospira", 1.26, 5, 11, 1), 
+	DGNODE[9]("Alphaproteobacteria", 0.91, 6, 12, 1), 
+	DGNODE[10]("Betaproteobacteria", 1.54, 6, 13, 1), 
+	DGNODE[11]("Deltaproteobacteria", 1.4, 6, 14, 1), 
+	DGNODE[12]("Epsilonproteobacteria", 0.48, 6, 15, 1), 
+	DGNODE[13]("Gammaproteobacteria", 4.85, 6, 16, 3), 
+	DGNODE[14]("", 1.02, 6, -1, 0), 
+	DGNODE[15]("", 0.49, 7, 19, 1)
+"order" (count=21)
+	DGNODE[0]("", 0.34, 0, 0, 1),
+	DGNODE[1]("Actinomycetales", 2.02, 1, 1, 3),
+	DGNODE[2]("Bifidobacteriales", 1.71, 1, 4, 1),
+	DGNODE[3]("", 0.88, 1, -1, 0),
+	DGNODE[4]("Prevotellaceae", 1.00, 2, 5, 1),
+	DGNODE[5]("Bacillales", 0.81, 3, 6, 1),
+	DGNODE[6]("Lactobacillales", 21.73, 3, 7, 3),
+	DGNODE[7]("", 1.02, 3, -1, 0),
+	DGNODE[8]("", 2.67, 3, -1, 0),
+	DGNODE[9]("Clostridiales", 4.69, 4, 10, 5),
+	DGNODE[10]("Fusobateriaceae", 0.74, 7, 15, 1),
+	DGNODE[11]("Nirospirales", 1.26, 8, 16, 1),
+	DGNODE[12]("Rhizobiales", 0.70, 9, 17, 1),
+	DGNODE[13]("Burkholderiales", 0.70, 10, 18, 1),
+	DGNODE[14]("", 0.66, 10, 19, 1),
+	DGNODE[15]("", 1.08, 11, 20, 1),
+	DGNODE[16]("Campylobacterales", 0.48, 12, 21, 1),
+	DGNODE[17]("Enterobacteriales", 0.28,13, 22, 1),
+	DGNODE[18]("Pseudomonadales", 3.25, 13, 23, 2),
+	DGNODE[19]("", 0.74, 13, 25, 1),
+	DGNODE[20]("", 0.49, 14, 26, 1)
+"family" (count=27)
+	DGNODE[0]("", 0.34, 0, 0, 1),
+	DGNODE[1]("", 0.00, -1, -1, 0),
+	DGNODE[2]("", 0.00, -1, -1, 0),
+	DGNODE[3]("", 0.00, -1, -1, 0),
+	DGNODE[4]("", 0.00, -1, -1, 0),
+	DGNODE[5]("", 0.00, -1, -1, 0),
+	DGNODE[6]("", 0.00, -1, -1, 0),
+	DGNODE[7]("", 0.00, -1, -1, 0),
+	DGNODE[8]("", 0.00, -1, -1, 0),
+	DGNODE[9]("", 0.00, -1, -1, 0),
+	DGNODE[10]("", 0.00, -1, -1, 0),
+	DGNODE[11]("", 0.00, -1, -1, 0),
+	DGNODE[12]("", 0.00, -1, -1, 0),
+	DGNODE[13]("", 0.00, -1, -1, 0),
+	DGNODE[14]("", 0.00, -1, -1, 0),
+	DGNODE[15]("", 0.00, -1, -1, 0),
+	DGNODE[16]("", 0.00, -1, -1, 0),
+	DGNODE[17]("", 0.00, -1, -1, 0),
+	DGNODE[18]("", 0.00, -1, -1, 0),
+	DGNODE[19]("", 0.00, -1, -1, 0),
+	DGNODE[20]("", 0.00, -1, -1, 0)
+	DGNODE[21]("", 0.00, -1, -1, 0),
+	DGNODE[22]("", 0.00, -1, -1, 0),
+	DGNODE[23]("", 0.00, -1, -1, 0),
+	DGNODE[24]("", 0.00, -1, -1, 0),
+	DGNODE[25]("", 0.00, -1, -1, 0),
+	DGNODE[26]("", 0.00, -1, -1, 0)
+"genus" (count=26)
+	DGNODE[0]("", 0.34, 0, 0, 1),
+	DGNODE[1]("", 0.00, -1, -1, 0),
+	DGNODE[2]("", 0.00, -1, -1, 0),
+	DGNODE[3]("", 0.00, -1, -1, 0),
+	DGNODE[4]("", 0.00, -1, -1, 0),
+	DGNODE[5]("", 0.00, -1, -1, 0),
+	DGNODE[6]("", 0.00, -1, -1, 0),
+	DGNODE[7]("", 0.00, -1, -1, 0),
+	DGNODE[8]("", 0.00, -1, -1, 0),
+	DGNODE[9]("", 0.00, -1, -1, 0),
+	DGNODE[10]("", 0.00, -1, -1, 0),
+	DGNODE[11]("", 0.00, -1, -1, 0),
+	DGNODE[12]("", 0.00, -1, -1, 0),
+	DGNODE[13]("", 0.00, -1, -1, 0),
+	DGNODE[14]("", 0.00, -1, -1, 0),
+	DGNODE[15]("", 0.00, -1, -1, 0),
+	DGNODE[16]("", 0.00, -1, -1, 0),
+	DGNODE[17]("", 0.00, -1, -1, 0),
+	DGNODE[18]("", 0.00, -1, -1, 0),
+	DGNODE[19]("", 0.00, -1, -1, 0),
+	DGNODE[20]("", 0.00, -1, -1, 0)
+	DGNODE[21]("", 0.00, -1, -1, 0),
+	DGNODE[22]("", 0.00, -1, -1, 0),
+	DGNODE[23]("", 0.00, -1, -1, 0),
+	DGNODE[24]("", 0.00, -1, -1, 0),
+	DGNODE[25]("", 0.00, -1, -1, 0)
+"species" (count=26)
+	DGNODE[0]("", 0.34, 0, 0, 1),
+	DGNODE[1]("", 0.00, -1, -1, 0),
+	DGNODE[2]("", 0.00, -1, -1, 0),
+	DGNODE[3]("", 0.00, -1, -1, 0),
+	DGNODE[4]("", 0.00, -1, -1, 0),
+	DGNODE[5]("", 0.00, -1, -1, 0),
+	DGNODE[6]("", 0.00, -1, -1, 0),
+	DGNODE[7]("", 0.00, -1, -1, 0),
+	DGNODE[8]("", 0.00, -1, -1, 0),
+	DGNODE[9]("", 0.00, -1, -1, 0),
+	DGNODE[10]("", 0.00, -1, -1, 0),
+	DGNODE[11]("", 0.00, -1, -1, 0),
+	DGNODE[12]("", 0.00, -1, -1, 0),
+	DGNODE[13]("", 0.00, -1, -1, 0),
+	DGNODE[14]("", 0.00, -1, -1, 0),
+	DGNODE[15]("", 0.00, -1, -1, 0),
+	DGNODE[16]("", 0.00, -1, -1, 0),
+	DGNODE[17]("", 0.00, -1, -1, 0),
+	DGNODE[18]("", 0.00, -1, -1, 0),
+	DGNODE[19]("", 0.00, -1, -1, 0),
+	DGNODE[20]("", 0.00, -1, -1, 0)
+	DGNODE[21]("", 0.00, -1, -1, 0),
+	DGNODE[22]("", 0.00, -1, -1, 0),
+	DGNODE[23]("", 0.00, -1, -1, 0),
+	DGNODE[24]("", 0.00, -1, -1, 0),
+	DGNODE[25]("", 0.00, -1, -1, 0)
